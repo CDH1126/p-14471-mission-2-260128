@@ -31,10 +31,11 @@ public class App {
             }
             else if (cmd.equals("목록")) {
 
-                for (int i = wiseSayings.size()-1; i >= 0; i-- ) {
+                for (int i = wiseSayings.size() - 1; i >= 0; i--) {
                     WiseSaying wsList = wiseSayings.get(i); // wiseSayings[i] 와 같은 맥락
                     System.out.println("%d / %s / %s".formatted(wsList.id, wsList.author, wsList.content));
                 }
+
             }
             else if (cmd.startsWith("삭제?id=")) {
                 String strId = cmd.split("id=")[1];
@@ -51,6 +52,33 @@ public class App {
                 }
                 if (!delStatus) { // 존재하지 않을 경우
                     System.out.println("%d번 명언은 존재하지 않습니다.".formatted(deleteId));
+                }
+            }
+            else if (cmd.startsWith("수정?id=")) {
+                String strId = cmd.split("id=")[1];
+                int modifyId = Integer.parseInt(strId);
+                boolean modifyStatus = false;
+
+                for (int i = 0; i < wiseSayings.size(); i++) {
+                    if (modifyId == wiseSayings.get(i).getId()) { // get(i)만 쓰면 객체 전체를 가져옴
+                        System.out.println("명언(기존) : %s".formatted(wiseSayings.get(i).getContent()));
+                        System.out.print("명언 : ");
+                        String modifyContent = sc.nextLine();
+
+                        System.out.println("작가(기존) : %s".formatted(wiseSayings.get(i).getAuthor()));
+                        System.out.print("작가 : ");
+                        String modifyAuthor = sc.nextLine();
+
+                        wiseSayings.get(i).setContent(modifyContent);
+                        wiseSayings.get(i).setAuthor(modifyAuthor);
+
+                        modifyStatus = true; // 값이 존재할 경우 delStatus를 true로 변경하여 if(!delStatus) 실행 안 함
+                        System.out.println("%d번 명언이 수정되었습니다.".formatted(modifyId));
+                        break;
+                    }
+                }
+                if (!modifyStatus) { // 존재하지 않을 경우
+                    System.out.println("%d번 명언은 수정하지 않습니다.".formatted(modifyId));
                 }
 
 
