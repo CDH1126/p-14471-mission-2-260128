@@ -39,13 +39,18 @@ public class App {
             else if (cmd.startsWith("삭제?id=")) {
                 String strId = cmd.split("id=")[1];
                 int deleteId = Integer.parseInt(strId);
+                boolean delStatus = false;
 
                 for (int i = 0; i < wiseSayings.size(); i++) {
                     if (deleteId == wiseSayings.get(i).getId()) { // get(i)만 쓰면 객체 전체를 가져옴
-                        System.out.println("%d번 명언이 삭제되었습니다.".formatted(deleteId));
                         wiseSayings.remove(i);
+                        delStatus = true; // 값이 존재할 경우 delStatus를 true로 변경하여 if(!delStatus) 실행 안 함
+                        System.out.println("%d번 명언이 삭제되었습니다.".formatted(deleteId));
                         break;
                     }
+                }
+                if (!delStatus) { // 존재하지 않을 경우
+                    System.out.println("%d번 명언은 존재하지 않습니다.".formatted(deleteId));
                 }
 
 
