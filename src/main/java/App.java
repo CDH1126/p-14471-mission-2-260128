@@ -32,9 +32,23 @@ public class App {
             else if (cmd.equals("목록")) {
 
                 for (int i = wiseSayings.size()-1; i >= 0; i-- ) {
-                    WiseSaying wsList = wiseSayings.get(i);
+                    WiseSaying wsList = wiseSayings.get(i); // wiseSayings[i] 와 같은 맥락
                     System.out.println("%d / %s / %s".formatted(wsList.id, wsList.author, wsList.content));
                 }
+            }
+            else if (cmd.startsWith("삭제?id=")) {
+                String strId = cmd.split("id=")[1];
+                int deleteId = Integer.parseInt(strId);
+
+                for (int i = 0; i < wiseSayings.size(); i++) {
+                    if (deleteId == wiseSayings.get(i).getId()) { // get(i)만 쓰면 객체 전체를 가져옴
+                        System.out.println("%d번 명언이 삭제되었습니다.".formatted(deleteId));
+                        wiseSayings.remove(i);
+                        break;
+                    }
+                }
+
+
             }
 
         }
