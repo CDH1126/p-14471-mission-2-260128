@@ -1,0 +1,1 @@
+rootProject.name = "p_14471_wiseSaying_CDH"
